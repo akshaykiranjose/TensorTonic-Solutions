@@ -7,7 +7,7 @@ def cumulative_returns(returns: list) -> list:
     w_t = 1
     W = []
     for r_t in returns:
-        w_t_minus_1 = float(w_t)
+        w_t_minus_1 = w_t
         w_t = w_t_minus_1*(1+r_t)
         W.append(w_t)
 
