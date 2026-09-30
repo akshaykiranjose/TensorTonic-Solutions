@@ -6,6 +6,8 @@ def apply_causal_mask(scores: list, mask_value: float = -1e9) -> np.ndarray:
     """
     # Write code here
     scores_np = np.array(scores)
-    scores_masked_np = np.ma.array(scores_np, mask = np.triu(scores, k=1))
-    scores_filled_np = scores_masked_np.filled(fill_value=mask_value)
-    return scores_filled_np
+    T = scores_np.shape[-1]
+    mask = np.triu(np.ones((T,T), dtype=bool), k=1)
+    scores_filled = scores.copy()
+    scores_filled[..., mask] = mask_value
+    return scores_filled
