@@ -1,11 +1,11 @@
 #include <cuda_runtime.h>
 
 __global__ void outer_product_kernel(const float* a, const float* b, float* C, int M, int N) {
-    // Write code here
+    // Write code here    
     int x_id = threadIdx.x + blockIdx.x * blockDim.x;
-    int y_id = threadIdx.y + blockIdx.y * blockDim.x;
+    int y_id = threadIdx.y + blockIdx.y * blockDim.y;
 
-    if ((x_id < N) && (y_id < M))
+    if ((x_id < N) && (y_id < M)) 
         C[y_id * N + x_id] = a[y_id] * b[x_id];
 }
 
